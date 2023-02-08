@@ -16,7 +16,6 @@ const CreatePost = () => {
     const [generatingImg, setGeneratingImg] = useState(false);
     const [loading, setLoading] = useState(false);
 
-
     const generateImage = async () => {
         if (form.prompt) {
             try {
@@ -30,11 +29,11 @@ const CreatePost = () => {
                         prompt: form.prompt,
                     }),
                 });
-
                 const data = await response.json();
+                console.log(data);
                 setForm({ ...form, photo: `data:image/jpeg;base64,${data.photo}` });
             } catch (err) {
-                alert(err);
+                console.log(err);
             } finally {
                 setGeneratingImg(false);
             }
@@ -43,14 +42,13 @@ const CreatePost = () => {
         }
     };
 
-
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         if (form.prompt && form.photo) {
             setLoading(true);
             try {
-                const response = await fetch('https://dalle-arbb.onrender.com/api/v1/post', {
+                const response = await fetch('http://localhost:8080/api/v1/post', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -154,6 +152,10 @@ const CreatePost = () => {
                     </div>
                 </form>
             </section>
+            <footer className='max-w-8xl mx-auto flex items-center justify-between my-10'>
+                <p className='mx-auto text-center'> ~ Developed By <span className='font-extrabold text-[#222328]'> YUG JADVANI </span></p>
+                {/* <p>Copyright © 2022-2023 That’s me. All rights reserved.</p> */}
+            </footer>
         </>
     )
 }

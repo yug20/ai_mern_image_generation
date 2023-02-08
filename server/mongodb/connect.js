@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 
 const connectDB = (url) => {
     mongoose.set('strictQuery', true);
-    mongoose.connect(url)
+    mongoose.connect("mongodb://localhost:27017/openai")
         .then(() => console.log('connected to mongo'))
         .catch((err) => {
             console.error('failed to connect with mongo');
