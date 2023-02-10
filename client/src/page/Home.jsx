@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-
 import { Card, FormField, Loader } from "../components";
 
 const RenderCards = ({ data, title }) => {
@@ -13,6 +12,7 @@ const RenderCards = ({ data, title }) => {
 };
 
 const Home = () => {
+
     const [loading, setLoading] = useState(false);
     const [allPosts, setAllPosts] = useState(null);
     const [searchText, setSearchText] = useState("");
@@ -30,6 +30,8 @@ const Home = () => {
                 },
             });
 
+            //? api:-- https://dalle-arbb.onrender.com/api/v1/post
+
             if (response.ok) {
                 const result = await response.json();
                 setAllPosts(result.data.reverse());
@@ -39,28 +41,6 @@ const Home = () => {
         } finally {
             setLoading(false);
         }
-
-        // axios
-        //     .get("http://localhost:8080/api/v1/post", {
-        //         headers: {
-        //             "Content-Type": "application/json",
-        //         },
-        //     })
-        //     .then(async function (response) {
-        //         console.log(response);
-
-        //         if (response.ok) {
-        //             const result = await response.json();
-        //             setAllPosts(result.data.reverse());
-        //         }
-        //     })
-        //     .catch(function (error) {
-        //         // handle error
-        //         console.log(error);
-        //     })
-        //     .finally(function () {
-        //         setLoading(false);
-        //     });
     };
 
     useEffect(() => {
