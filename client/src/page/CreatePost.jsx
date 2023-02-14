@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { getRandomPrompt } from '../utills'
+import { downloadImage, getRandomPrompt } from '../utills'
 import { FormField, Loader } from '../components'
 import { preview } from "../assets";
 import { useNavigate } from 'react-router-dom';
@@ -16,11 +16,15 @@ const CreatePost = () => {
     const [generatingImg, setGeneratingImg] = useState(false);
     const [loading, setLoading] = useState(false);
 
+    // const downLoadImages = async () => {
+    //     FileSaver.saveAs(photo, `download-${_id}.jpg`);
+    // }
+
     const generateImage = async () => {
         if (form.prompt) {
             try {
                 setGeneratingImg(true);
-                const response = await fetch('http://localhost:8080/api/v1/dalle', {
+                const response = await fetch('https://ai-mern-image-generation.onrender.com/api/v1/dalle', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -140,6 +144,14 @@ const CreatePost = () => {
                             {generatingImg ? 'Generating...' : 'Generate'}
                         </button>
                     </div>
+
+                    {/* <div className="mt-5 flex gap-5">
+                        <button type='button'
+                            onClick={() => downLoadImages(_id, photo)}
+                            className="text-white bg-green-700 font-medium rounded-md text-sm w-full sm:w-auto px-5 py-2.5 text-center">
+                            DownLoad
+                        </button>
+                    </div> */}
 
                     <div className="mt-10">
                         <p className="mt-2 text-[#666e75] text-[14px]">** Once you have created the image you want, you can share it with others in the community **</p>

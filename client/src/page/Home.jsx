@@ -29,8 +29,9 @@ const Home = () => {
                     'Content-Type': 'application/json',
                 },
             });
+            console.log(response);
 
-            //? api:-- https://dalle-arbb.onrender.com/api/v1/post
+            // api:-- https://dalle-arbb.onrender.com/api/v1/post
 
             if (response.ok) {
                 const result = await response.json();
